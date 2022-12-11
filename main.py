@@ -36,10 +36,11 @@ def test2(stdscr):
 
 
 def test3(stdscr):
-    curses.init_pair(1, curses.COLOR_BLUE, curses.COLOR_YELLOW)
+    curses.init_pair(1, curses.COLOR_BLUE, curses.COLOR_BLUE)
     newWindow = curses.newwin(1, 20, 10, 10)
     newWindow.clear()
-    newWindow.bkgd(curses.color_pair(1))
+    # newWindow.bkgd(curses.color_pair(1))
+    newWindow.addstr(f"lines: {curses.LINES-1} " + f"/cols:{curses.COLS-1}", curses.color_pair(1))
     newWindow.refresh()
     newWindow.getch()
     stdscr.getch()
