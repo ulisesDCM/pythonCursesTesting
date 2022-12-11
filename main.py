@@ -2,7 +2,7 @@ import curses
 from curses import wrapper
 import time
 
-def firstTest(stdscr):
+def test1(stdscr):
     stdscr.clear()
     for i in range(1,11):
         v = i-0
@@ -11,7 +11,7 @@ def firstTest(stdscr):
     stdscr.getkey()
 
 
-def secondTest(stdscr):
+def test2(stdscr):
     curses.init_pair(1, curses.COLOR_BLUE, curses.COLOR_YELLOW)
     curses.init_pair(2, curses.COLOR_GREEN, curses.COLOR_BLACK)
     curses.init_pair(3, curses.COLOR_RED, curses.COLOR_WHITE)
@@ -35,6 +35,16 @@ def secondTest(stdscr):
     stdscr.getch()
 
 
+def test3(stdscr):
+    curses.init_pair(1, curses.COLOR_BLUE, curses.COLOR_YELLOW)
+    newWindow = curses.newwin(1, 20, 10, 10)
+    newWindow.clear()
+    newWindow.bkgd(curses.color_pair(1))
+    newWindow.refresh()
+    newWindow.getch()
+    stdscr.getch()
+
 if __name__ == '__main__':
-    # wrapper(firstTest)
-    wrapper(secondTest)
+    # wrapper(test1)
+    # wrapper(test2)
+    wrapper(test3)
