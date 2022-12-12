@@ -70,9 +70,22 @@ def test4(stdscr):
         time.sleep(0.2) 
     stdscr.getch()  #Stop program execution
 
+# Testing first ball movement through the screen
+def test5(stdscr):
 
+    ball = curses.newwin(1,2,0,0)
+    ball.clear()
+    ball.addstr("a")
+    
+    for i in range(curses.COLS-1):
+        stdscr.clear()
+        ball.mvwin(5,i)
+        ball.refresh()
+        time.sleep(0.01)
+    
 if __name__ == '__main__':
     # wrapper(test1)
     # wrapper(test2)
     # wrapper(test3)
-    wrapper(test4)
+    # wrapper(test4)
+    wrapper(test5)
