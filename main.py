@@ -76,14 +76,15 @@ def test5(stdscr):
     ballInitPosY = 0
     ballWinWidth = 2
     ballWinHeight = 1
-    ballShape = "a"
+    ballShape = "@"
     ballSpeedX = 1
-    ballSpeedY = 1
+    ballSpeedY = 2
     ballNewPosX = 0
     ballNewPosY = 0
     ballCurrPosX = ballInitPosX
     ballCurrPosY = ballInitPosY
 
+    curses.curs_set(0)
     ball = curses.newwin(ballWinHeight,
                             ballWinWidth,
                             ballInitPosX,
@@ -94,24 +95,30 @@ def test5(stdscr):
     while(1):
         # Calculate new ball position
         ballNewPosX = ballCurrPosX + ballSpeedX
-        # ballNewPosY = ballCurrPosY + ballSpeedY
+        ballNewPosY = ballCurrPosY + ballSpeedY
         
         # Check screen max limit condition in X axis
-        if(ballNewPosX >= curses.COLS-1):
+        if(ballNewPosX >= curses.COLS-2):
             ballSpeedX = ballSpeedX * -1
-            ballNewPosX = ballCurrPosX + ballSpeedX
-        
+            ballNewPosX = curses.COLS-2
+        elif(ballNewPosX < 0):
+            ballSpeedX = ballSpeedX * -1
+            ballNewPosX = 0
+
         # Check screen max limit condition in Y axis
         if(ballNewPosY >= curses.LINES-1):
             ballSpeedY = ballSpeedY * -1
-            ballNewPosY = ballCurrPosY + ballSpeedY
-        
+            ballNewPosY = curses.LINES-1
+        elif(ballNewPosY < 0):
+            ballSpeedY = ballSpeedY * -1
+            ballNewPosY = 0
+
         # Draw the ball
         stdscr.clear()
         stdscr.refresh()
         ball.mvwin(ballNewPosY,ballNewPosX)
         ball.refresh()
-        time.sleep(0.1)
+        time.sleep(0.01)
 
         # Update the current position variables
         ballCurrPosX = ballNewPosX
