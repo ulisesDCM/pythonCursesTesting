@@ -72,27 +72,50 @@ def test4(stdscr):
 
 # Testing first ball movement through the screen
 def test5(stdscr):
+    ballInitPosX = 0
+    ballInitPosY = 0
+    ballWinWidth = 2
+    ballWinHeight = 1
+    ballShape = "a"
+    ballSpeedX = 1
+    ballSpeedY = 1
+    ballNewPosX = 0
+    ballNewPosY = 0
+    ballCurrPosX = ballInitPosX
+    ballCurrPosY = ballInitPosY
 
-    ball = curses.newwin(1,2,0,0)
+    ball = curses.newwin(ballWinHeight,
+                            ballWinWidth,
+                            ballInitPosX,
+                            ballInitPosY)
     ball.clear()
-    ball.addstr("a")
+    ball.addstr(ballShape)
     
-    # Moving horizontal 
-    # for i in range(curses.COLS-1):
-    #     stdscr.clear()
-    #     stdscr.refresh()
-    #     ball.mvwin(5,i)
-    #     ball.refresh()
-    #     time.sleep(0.02)
-    
-    # Moving vertical
-    for i in range(curses.LINES-1):
+    while(1):
+        # Calculate new ball position
+        ballNewPosX = ballCurrPosX + ballSpeedX
+        # ballNewPosY = ballCurrPosY + ballSpeedY
+        
+        # Check screen max limit condition in X axis
+        if(ballNewPosX >= curses.COLS-1):
+            ballSpeedX = ballSpeedX * -1
+            ballNewPosX = ballCurrPosX + ballSpeedX
+        
+        # Check screen max limit condition in Y axis
+        if(ballNewPosY >= curses.LINES-1):
+            ballSpeedY = ballSpeedY * -1
+            ballNewPosY = ballCurrPosY + ballSpeedY
+        
+        # Draw the ball
         stdscr.clear()
         stdscr.refresh()
-        ball.mvwin(i,5)
+        ball.mvwin(ballNewPosY,ballNewPosX)
         ball.refresh()
-        time.sleep(0.02)
+        time.sleep(0.1)
 
+        # Update the current position variables
+        ballCurrPosX = ballNewPosX
+        ballCurrPosY = ballNewPosY
 
 if __name__ == '__main__':
     # wrapper(test1)
