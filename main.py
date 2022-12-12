@@ -77,12 +77,23 @@ def test5(stdscr):
     ball.clear()
     ball.addstr("a")
     
-    for i in range(curses.COLS-1):
-        stdscr.clear()
-        ball.mvwin(5,i)
-        ball.refresh()
-        time.sleep(0.01)
+    # Moving horizontal 
+    # for i in range(curses.COLS-1):
+    #     stdscr.clear()
+    #     stdscr.refresh()
+    #     ball.mvwin(5,i)
+    #     ball.refresh()
+    #     time.sleep(0.02)
     
+    # Moving vertical
+    for i in range(curses.LINES-1):
+        stdscr.clear()
+        stdscr.refresh()
+        ball.mvwin(i,5)
+        ball.refresh()
+        time.sleep(0.02)
+
+
 if __name__ == '__main__':
     # wrapper(test1)
     # wrapper(test2)
